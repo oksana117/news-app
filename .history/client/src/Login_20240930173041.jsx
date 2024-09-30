@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
@@ -14,9 +13,6 @@ function Login({ setIsAuthenticated }) {
             .then(result => {
                 if (result.data === "Success") {
                     localStorage.setItem('user', email);
-                    localStorage.setItem('userId', result.data.userId);
-                    const userId = localStorage.getItem('userId');
-                    console.log(userId);
                     setIsAuthenticated(true);
                     navigate('/home');
                 } else {

@@ -22,11 +22,13 @@ export const NavbarBootstrap = ({ isAuthenticated, setIsAuthenticated }) => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                       
+                        {isAuthenticated && (
+                            <>
                                 <Nav.Link href="/home">Home</Nav.Link>
                                 <Nav.Link href="/search">Search News</Nav.Link>
                                 <Nav.Link onClick={handleLogout}>Logout</Nav.Link> 
-                          
+                            </>
+                        )}
                         
                     </Nav>
                 </Navbar.Collapse>

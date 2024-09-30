@@ -37,7 +37,7 @@ app.post('/register', (req, res) => {
 })
 
 app.post('/logout', (req, res) => {
-
+    // Here you can handle any server-side logout logic if needed
     res.json("Logged out successfully");
 });
 

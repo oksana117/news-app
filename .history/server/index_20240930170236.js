@@ -37,7 +37,6 @@ app.post('/register', (req, res) => {
 })
 
 app.post('/logout', (req, res) => {
-
     res.json("Logged out successfully");
 });
 

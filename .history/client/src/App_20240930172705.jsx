@@ -5,8 +5,7 @@ import Login from './Login'
 import Home from './Home'
 import Search from './Search.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { NavbarBootstrap } from './components/Navbar.jsx'
-import { useState, useEffect } from 'react';
+import {NavbarBootstrap} from './components/Navbar.jsx'
 
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
@@ -38,5 +37,8 @@ function App() {
   );
 }
 
+    
+  )
+}
 
 export default App
