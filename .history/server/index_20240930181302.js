@@ -18,10 +18,9 @@ app.post('/login', (req, res) => {
         .then(user => {
             if (user) {
                 if (user.password === password) {
-                    //res.json({ message: "Success", userId: req.user.id }); // stopped here
-                    res.json("Success")
-
-
+                    //res.json({ message: "Success", userId: user._id });
+                    // res.json("Success")
+                    res.json({ message: "Success", userId: user._id });
                 }
                 else {
                     res.json("Incorrect password.")

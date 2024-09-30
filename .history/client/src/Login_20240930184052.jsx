@@ -15,7 +15,7 @@ function Login({ setIsAuthenticated }) {
                 
                 if (result.data === "Success") {
                     localStorage.setItem('user', email);
-                    localStorage.setItem('userId', result.data.userId);
+                    localStorage.setItem('userId', result.data.user.);
                     const storedUserId = localStorage.getItem('userId');
                     //const emailS =localStorage.getItem('user');
                     console.log(storedUserId);

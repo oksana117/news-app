@@ -15,10 +15,14 @@ function Login({ setIsAuthenticated }) {
                 
                 if (result.data === "Success") {
                     localStorage.setItem('user', email);
-                    localStorage.setItem('userId', result.data.userId);
-                    const storedUserId = localStorage.getItem('userId');
-                    //const emailS =localStorage.getItem('user');
-                    console.log(storedUserId);
+                    //localStorage.setItem('userId', result.data.userId);
+                    //const storedUserId = localStorage.getItem('userId');
+                    const emailS =localStorage.getItem('user');
+                    console.log(emailS);
+                    if (data.userId) {
+            console.log('User ID:', data.userId);
+                                }
+
                     setIsAuthenticated(true);
                     navigate('/home');
                 } else {
@@ -27,7 +31,6 @@ function Login({ setIsAuthenticated }) {
             })
             .catch(err => console.log(err));
     };
-    
 
     return (
         <div className="row">

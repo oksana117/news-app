@@ -13,12 +13,12 @@ app.use(cors())
 mongoose.connect("mongodb://localhost:27017/usersNewsArticles")
 
 app.post('/login', (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, id } = req.body;
     UsersModel.findOne({ email: email })
         .then(user => {
             if (user) {
                 if (user.password === password) {
-                    //res.json({ message: "Success", userId: req.user.id }); // stopped here
+                    //res.json({ message: "Success", userId: req.user.id });
                     res.json("Success")
 
 

@@ -11,6 +11,9 @@ function Login({ setIsAuthenticated }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post('http://localhost:3001/login', { email, password })
+            headers: {
+        'Content-Type': 'application/json'
+    
             .then(result => {
                 
                 if (result.data === "Success") {

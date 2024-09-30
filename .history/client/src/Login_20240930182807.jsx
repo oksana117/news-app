@@ -7,18 +7,19 @@ function Login({ setIsAuthenticated }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-
-    const handleSubmit = (e) => {
+    const [message1, setMessage] = useState('');
+/*
+    const handleSubmit2 = (e) => {
         e.preventDefault();
         axios.post('http://localhost:3001/login', { email, password })
             .then(result => {
                 
                 if (result.data === "Success") {
                     localStorage.setItem('user', email);
-                    localStorage.setItem('userId', result.data.userId);
-                    const storedUserId = localStorage.getItem('userId');
-                    //const emailS =localStorage.getItem('user');
-                    console.log(storedUserId);
+                    //localStorage.setItem('userId', result.data.userId);
+                    //const storedUserId = localStorage.getItem('userId');
+                    const emailS =localStorage.getItem('user');
+                    console.log(emailS);
                     setIsAuthenticated(true);
                     navigate('/home');
                 } else {
@@ -26,8 +27,23 @@ function Login({ setIsAuthenticated }) {
                 }
             })
             .catch(err => console.log(err));
+    };*/
+
+       const handleSubmit = async (e) => {
+        e.preventDefault();
+        const response = await fetch('http://localhost:5000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
+        const data = await response.json();
+        setMessage(data.message1);
+        if (data.userId) {
+            console.log('User ID:', data.userId);
+        }
     };
-    
 
     return (
         <div className="row">

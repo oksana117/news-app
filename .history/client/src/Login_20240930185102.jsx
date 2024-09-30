@@ -13,7 +13,7 @@ function Login({ setIsAuthenticated }) {
         axios.post('http://localhost:3001/login', { email, password })
             .then(result => {
                 
-                if (result.data === "Success") {
+                if (result.data.me === "Success") {
                     localStorage.setItem('user', email);
                     localStorage.setItem('userId', result.data.userId);
                     const storedUserId = localStorage.getItem('userId');

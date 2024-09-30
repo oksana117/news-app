@@ -12,13 +12,14 @@ function Login({ setIsAuthenticated }) {
         e.preventDefault();
         axios.post('http://localhost:3001/login', { email, password })
             .then(result => {
-                
-                if (result.data === "Success") {
+                const data = result.data;
+                if (data === "Success") {
                     localStorage.setItem('user', email);
-                    localStorage.setItem('userId', result.data.userId);
-                    const storedUserId = localStorage.getItem('userId');
-                    //const emailS =localStorage.getItem('user');
-                    console.log(storedUserId);
+                    //localStorage.setItem('userId', result.data.userId);
+                    //const storedUserId = localStorage.getItem('userId');
+                    const emailS =localStorage.getItem('user');
+                    console.log(emailS);
+
                     setIsAuthenticated(true);
                     navigate('/home');
                 } else {
@@ -27,7 +28,6 @@ function Login({ setIsAuthenticated }) {
             })
             .catch(err => console.log(err));
     };
-    
 
     return (
         <div className="row">
