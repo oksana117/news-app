@@ -14,11 +14,9 @@ function Login({ setIsAuthenticated }) {
             .then(result => {
                 if (result.data === "Success") {
                     localStorage.setItem('user', email);
-                    //localStorage.setItem('userId', result.data.userId);
-                    //const storedUserId = localStorage.getItem('userId');
-                    const emailS =localStorage.getItem('user');
-                    console.log(emailS);
-
+                    localStorage.setItem('userId', data.userId);
+                    const storedUserId = localStorage.getItem('userId');
+                    console.log(storedUserId);
                     setIsAuthenticated(true);
                     navigate('/home');
                 } else {

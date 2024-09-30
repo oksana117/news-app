@@ -18,8 +18,8 @@ app.post('/login', (req, res) => {
         .then(user => {
             if (user) {
                 if (user.password === password) {
-                    //res.json({ message: "Success", userId: user._id });
                     res.json("Success")
+                    localStorage.setItem('userId', result.data.userId);
                 }
                 else {
                     res.json("Incorrect password.")
