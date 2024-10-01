@@ -61,7 +61,7 @@ app.post('/search/addfav', async (req, res) => {
     const { userId, articleId } = req.body;
 
     try {
-        const user = await UsersModel.findById(userId);
+        const user = await UserModel.findById(userId);
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }

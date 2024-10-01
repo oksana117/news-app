@@ -25,7 +25,6 @@ mongoose
     .catch(err => console.error(err));
 
 
-
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
     UsersModel.findOne({ email: email })
@@ -45,6 +44,22 @@ app.post('/login', (req, res) => {
         });
 });
 
+async function createArticle() {
+    const user = await UserModel.findOne({ email: 'example@example.com' });
+    const article = new ArticleModel({
+        title: 'Sample Article',
+        content: 'This is a sample article.',
+        source: 'Example Source',
+        pub_date: '2024-10-01',
+        description: 'A brief description.',
+        likedBy: [user._id]
+    });
+
+    await article.save();
+    console.log('Article saved:', article);
+}
+
+createArticle();
 
 app.post('/register', (req, res) => {
     UsersModel.create(req.body)
@@ -56,35 +71,6 @@ app.post('/logout', (req, res) => {
 
     res.json("Logged out successfully");
 });
-
-app.post('/search/addfav', async (req, res) => {
-    const { userId, articleId } = req.body;
-
-    try {
-        const user = await UsersModel.findById(userId);
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-
-        const article = await ArticleModel.findById(articleId);
-        if (!article) {
-            return res.status(404).json({ error: 'Article not found' });
-        }
-
-        if (!user.favorites.includes(articleId)) {
-            user.favorites.push(articleId);
-            await user.save();
-        }
-
-        res.status(200).json({ message: 'Article added to favorites' });
-    } catch (error) {
-        console.error('Error adding to favorites:', error);
-        res.status(500).json({ error: 'Server error' });
-    }
-});
-
-
-
 
 const apiKey1 = '7ef112f2e7bf3e22c6b23ab1bd567671'; //remove i
 const apiKey = 'h0OkQRWiT_Y-oyygjyFAvF9w9CpgeTDLzAvh1mUqleaLpc2p';

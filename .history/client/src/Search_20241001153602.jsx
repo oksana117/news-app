@@ -14,35 +14,29 @@ function Search() {
     setCurrentPage(pageNumber);
   };
 
-const addToFavorites = (article) => {
-  if (!userId) {
-    console.error('User not logged in');
-    return;
-  }
-  console.log("got to add fav");
-  fetch('http://localhost:3001/search/addfav', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ userId, articleId: article._id })
-  })
-  .then(response => {
-    if (!response.ok) {
-      return response.text().then(text => { throw new Error(text) });
+  const addToFavorites = (article) => {
+    if (!userId) {
+      console.error('User not logged in');
+      return;
     }
-    return response.json();
-  })
-  .then(data => {
-    if (data.message === "Article added to favorites") {
-      setFavorites([...favorites, article]);
-    } else {
-      console.error('Error adding to favorites:', data.message);
-    }
-  })
-  .catch(error => console.error('Error:', error.message));
-};
 
+    fetch('http://localhost:3001/add-to-favorites', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ userId, articleId: article._id })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.message === "Article added to favorites") {
+        setFavorites([...favorites, article]);
+      } else {
+        console.error('Error adding to favorites:', data.message);
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  };
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;

@@ -57,32 +57,6 @@ app.post('/logout', (req, res) => {
     res.json("Logged out successfully");
 });
 
-app.post('/search/addfav', async (req, res) => {
-    const { userId, articleId } = req.body;
-
-    try {
-        const user = await UsersModel.findById(userId);
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-
-        const article = await ArticleModel.findById(articleId);
-        if (!article) {
-            return res.status(404).json({ error: 'Article not found' });
-        }
-
-        if (!user.favorites.includes(articleId)) {
-            user.favorites.push(articleId);
-            await user.save();
-        }
-
-        res.status(200).json({ message: 'Article added to favorites' });
-    } catch (error) {
-        console.error('Error adding to favorites:', error);
-        res.status(500).json({ error: 'Server error' });
-    }
-});
-
 
 
 

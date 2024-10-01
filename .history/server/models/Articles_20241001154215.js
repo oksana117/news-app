@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-//const ArticleModel = require('./Users');
+const ArticleModel = require('./Users');
 
 // Article Schema
 const ArticleSchema = new mongoose.Schema({

@@ -3,7 +3,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
 const UsersModel = require("./models/Users")
-const ArticleModel = require("./models/Articles")
+const ArticlesModel = require("./models/Articles")
 const request = require('request');
 
 
@@ -11,20 +11,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-//mongoose.connect("mongodb://localhost:27017/usersNewsArticles")
-
-mongoose
-    .connect("mongodb://localhost:27017", {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        dbName: 'usersNewsArticles',
-    })
-    .then(() => {
-        console.log('Connected to the Database.');
-    })
-    .catch(err => console.error(err));
-
-
+mongoose.connect("mongodb://localhost:27017/usersNewsArticles")
 
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
@@ -45,7 +32,6 @@ app.post('/login', (req, res) => {
         });
 });
 
-
 app.post('/register', (req, res) => {
     UsersModel.create(req.body)
         .then(usersNewsArticles => res.json(usersNewsArticles))
@@ -56,35 +42,6 @@ app.post('/logout', (req, res) => {
 
     res.json("Logged out successfully");
 });
-
-app.post('/search/addfav', async (req, res) => {
-    const { userId, articleId } = req.body;
-
-    try {
-        const user = await UsersModel.findById(userId);
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-
-        const article = await ArticleModel.findById(articleId);
-        if (!article) {
-            return res.status(404).json({ error: 'Article not found' });
-        }
-
-        if (!user.favorites.includes(articleId)) {
-            user.favorites.push(articleId);
-            await user.save();
-        }
-
-        res.status(200).json({ message: 'Article added to favorites' });
-    } catch (error) {
-        console.error('Error adding to favorites:', error);
-        res.status(500).json({ error: 'Server error' });
-    }
-});
-
-
-
 
 const apiKey1 = '7ef112f2e7bf3e22c6b23ab1bd567671'; //remove i
 const apiKey = 'h0OkQRWiT_Y-oyygjyFAvF9w9CpgeTDLzAvh1mUqleaLpc2p';
