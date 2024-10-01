@@ -58,29 +58,30 @@ app.post('/logout', (req, res) => {
 });
 
 app.post('/search/addfav', async (req, res) => {
-    const { userId, articleId, title, content, source, pub_date, description } = req.body;
+    const { userId, articleId } = req.body;
 
     try {
-        // Create a new article with the provided details
-        const newArticle = new ArticleModel({
-            _id: articleId,
-            title,
-            content,
-            source,
-            pub_date,
-            description,
-            likedBy: [userId]
-        });
+        const user = await UsersModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
 
-        // Save the new article
-        await newArticle.save();
+       /* const article = await ArticleModel.findById(articleId);
+        if (!article) {
+            return res.status(404).json({ error: 'Article not found' });
+        }
 
-        res.status(200).json({ message: 'Article saved and liked successfully' });
+        if (!user.favorites.includes(articleId)) {
+            user.favorites.push(articleId);
+            await user.save();
+        }
+
+        res.status(200).json({ message: 'Article added to favorites' });
     } catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        console.error('Error adding to favorites:', error);
+        res.status(500).json({ error: 'Server error' });
     }
 });
-
 
 
 

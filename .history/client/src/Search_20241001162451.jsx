@@ -7,7 +7,7 @@ function Search() {
   const [news, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
- // const [ setFavorites] = useState([]);
+  const [ setFavorites] = useState([]);
   //const userId = localStorage.getItem('userId'); // Retrieve user ID from local storage
 
   const handlePageChange = (pageNumber) => {
@@ -36,14 +36,19 @@ function Search() {
         description: article.description
       })
     })
-    .then(response => response.json())
-   /* .then(data => {
+    .then(response => {
+      if (!response.ok) {
+        return response.text().then(text => { throw new Error(text) });
+      }
+      return response.json();
+    })
+    .then(data => {
       if (data.message === "Article saved and liked successfully") {
         setFavorites(prevFavorites => [...prevFavorites, article]);
       } else {
         console.error('Error adding to favorites:', data.message);
       }
-    })*/
+    })
     .catch(error => console.error('Error:', error.message));
   };
 

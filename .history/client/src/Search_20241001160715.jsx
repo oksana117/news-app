@@ -7,45 +7,43 @@ function Search() {
   const [news, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
- // const [ setFavorites] = useState([]);
+  //const [favorites, setFavorites] = useState([]);
   //const userId = localStorage.getItem('userId'); // Retrieve user ID from local storage
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  const addToFavorites = (article) => {
-    const userId = localStorage.getItem('userId'); // Retrieve user ID from local storage
-    if (!userId) {
-      console.error('User not logged in');
-      return;
+const addToFavorites = (article) => {
+  const userId = localStorage.getItem('userId'); // Retrieve user ID from local storage
+  if (!userId) {
+    console.error('User not logged in');
+    return;
+  }
+  console.log("got to add fav");
+  fetch('http://localhost:3001/search/addfav', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ userId, articleId: article._id })
+  })
+  .then(response => {
+    if (!response.ok) {
+      return response.text().then(text => { throw new Error(text) });
     }
-    console.log("got to add fav");
-    fetch('http://localhost:3001/search/addfav', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        userId,
-        articleId: article._id,
-        title: article.title,
-        content: article.content,
-        source: article.source,
-        pub_date: article.pub_date,
-        description: article.description
-      })
-    })
-    .then(response => response.json())
-   /* .then(data => {
-      if (data.message === "Article saved and liked successfully") {
-        setFavorites(prevFavorites => [...prevFavorites, article]);
-      } else {
-        console.error('Error adding to favorites:', data.message);
-      }
-    })*/
-    .catch(error => console.error('Error:', error.message));
-  };
+    return response.json();
+  })
+  .then(data => {
+    if (data.message === "Article added to favorites") {
+      setFavorites(prevFavorites => [...prevFavorites, article]);
+    } else {
+      console.error('Error adding to favorites:', data.message);
+    }
+  })
+  .catch(error => console.error('Error:', error.message));
+};
+
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;

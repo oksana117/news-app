@@ -63,7 +63,7 @@ app.post('/search/addfav', async (req, res) => {
     try {
         // Create a new article with the provided details
         const newArticle = new ArticleModel({
-            _id: articleId,
+
             title,
             content,
             source,
@@ -75,12 +75,12 @@ app.post('/search/addfav', async (req, res) => {
         // Save the new article
         await newArticle.save();
 
-        res.status(200).json({ message: 'Article saved and liked successfully' });
+        res.status(200).send('Article saved and liked successfully');
     } catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).send('Server error');
     }
-});
 
+});
 
 
 

@@ -58,29 +58,28 @@ app.post('/logout', (req, res) => {
 });
 
 app.post('/search/addfav', async (req, res) => {
-    const { userId, articleId, title, content, source, pub_date, description } = req.body;
+    const { userId, articleId } = req.body;
 
     try {
-        // Create a new article with the provided details
-        const newArticle = new ArticleModel({
-            _id: articleId,
-            title,
-            content,
-            source,
-            pub_date,
-            description,
-            likedBy: [userId]
-        });
+        // Find the article by ID
+        const article = await ArticleModel.findById(articleId);
 
-        // Save the new article
-        await newArticle.save();
+        if (!article) {
+            return res.status(404).send('Article not found');
+        }
 
-        res.status(200).json({ message: 'Article saved and liked successfully' });
+        // Add userId to likedBy array if not already present
+        if (!article.likedBy.includes(userId)) {
+            article.likedBy.push(userId);
+            await article.save();
+        }
+
+        res.status(200).send('Article liked successfully');
     } catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).send('Server error');
+    }
     }
 });
-
 
 
 

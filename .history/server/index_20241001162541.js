@@ -75,12 +75,12 @@ app.post('/search/addfav', async (req, res) => {
         // Save the new article
         await newArticle.save();
 
-        res.status(200).json({ message: 'Article saved and liked successfully' });
+        res.status(200).send('SArticle saved and liked successfully');
     } catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).send('Server error');
     }
-});
 
+});
 
 
 
