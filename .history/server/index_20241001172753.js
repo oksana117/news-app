@@ -58,7 +58,7 @@ app.post('/logout', (req, res) => {
 });
 
 app.post('/search/addfav', async (req, res) => {
-    const { userId, articleId, title, image, source, url, pub_date, description } = req.body;
+    const { userId, articleId, title, image, source,url, pub_date, description } = req.body;
 
     try {
         // Create a new article with the provided details
@@ -67,7 +67,6 @@ app.post('/search/addfav', async (req, res) => {
             title,
             image,
             source,
-            url,
             pub_date,
             description,
             likedBy: [userId]

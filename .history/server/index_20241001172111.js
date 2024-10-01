@@ -58,7 +58,7 @@ app.post('/logout', (req, res) => {
 });
 
 app.post('/search/addfav', async (req, res) => {
-    const { userId, articleId, title, image, source, url, pub_date, description } = req.body;
+    const { userId, articleId, title, image, source, pub_date, description } = req.body;
 
     try {
         // Create a new article with the provided details
@@ -67,7 +67,6 @@ app.post('/search/addfav', async (req, res) => {
             title,
             image,
             source,
-            url,
             pub_date,
             description,
             likedBy: [userId]
@@ -125,19 +124,6 @@ app.get('/favorites/:userId', async (req, res) => {
         const favoriteArticles = await ArticleModel.find({ likedBy: userId, isDeleted: false });
 
         res.status(200).json(favoriteArticles);
-    } catch (error) {
-        res.status(500).json({ message: 'Server error' });
-    }
-});
-
-app.post('/favorites/remove', async (req, res) => {
-    const { userId, articleId } = req.body;
-
-    try {
-        // Find the article by ID and update isDeleted to true
-        await ArticleModel.findByIdAndUpdate(articleId, { isDeleted: true });
-
-        res.status(200).json({ message: 'Article removed from favorites' });
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }

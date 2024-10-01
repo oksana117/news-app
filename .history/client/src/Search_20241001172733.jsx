@@ -32,7 +32,7 @@ function Search() {
         title: article.title,
         image: article.image,
         source: article.source,
-        url: article.url,
+        url: article.ur
         pub_date: article.published_at,
         description: article.description
       })
