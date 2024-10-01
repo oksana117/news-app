@@ -11,14 +11,14 @@ function Search() {
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
   const [favorites, setFavorites] = useState([]);
-  
+   const userId = localStorage.getItem('userId');
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
   const addToFavorites = (article) => {
-     console.log()
+    console.log(userId);
      setFavorites([...favorites, article]);
   
    };

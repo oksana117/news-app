@@ -11,7 +11,6 @@ function Search() {
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
   const [favorites, setFavorites] = useState([]);
-  
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);

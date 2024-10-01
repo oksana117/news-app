@@ -2,30 +2,18 @@ import 'font-awesome/css/font-awesome.min.css';
 import { useEffect, useState } from "react";
 import "./app.css";
 
-
 function Search() {
-
-
   const [query, setQuery] = useState("");
   const [news, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
   const [favorites, setFavorites] = useState([]);
-  
+  const userId = localStorage.getItem('userId'); // Retrieve user ID from local storage
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  const addToFavorites = (article) => {
-     console.log()
-     setFavorites([...favorites, article]);
-  
-   };
-  /*
-   const removeFromFavorites = (article) => {
-    setFavorites(favorites.filter(fav => fav.title !== article.title));
-  };*/
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
@@ -33,8 +21,7 @@ function Search() {
   const totalPages = Math.ceil(news.length / rowsPerPage);
 
   useEffect(() => {
- 
-  if (query.length >= 2) {
+    if (query.length >= 2) {
       fetch(`http://localhost:3001/search?keywords=${query}`)
         .then(response => response.json())
         .then(data => {
@@ -51,41 +38,61 @@ function Search() {
   }, [query]);
 
 
-return (
-  <div className="app">
-    <input
-      className="search"
-      placeholder="Search..."
-      onChange={(e) => setQuery(e.target.value.toLowerCase())}
-    />
-   <table className="styled-table">
+  const addToFavorites = (article) => {
+    if (!userId) {
+      console.error('User not logged in');
+      return;
+    }
+
+    fetch('http://localhost:3001/add-to-favorites', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ userId, articleId: article._id })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.message === "Article added to favorites") {
+        setFavorites([...favorites, article]);
+      } else {
+        console.error('Error adding to favorites:', data.message);
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  };
+  return (
+    <div className="app">
+      <input
+        className="search"
+        placeholder="Search..."
+        onChange={(e) => setQuery(e.target.value.toLowerCase())}
+      />
+      <table className="styled-table">
         <thead>
           <tr>
-          <th>Title</th>
-          <th></th>
+            <th>Title</th>
+            <th></th>
             <th>Source</th>
             <th>Publication Date</th>
-          <th>Description</th>
-          <th>Favourite</th>
-
+            <th>Description</th>
+            <th>Favourite</th>
           </tr>
         </thead>
         <tbody>
           {currentRows.map((article, index) => (
             <tr key={index}>
               <td>{article.title}</td>
-               <td><img src={article.image} alt={article.title} className="article-image" /></td>
+              <td><img src={article.image} alt={article.title} className="article-image" /></td>
               <td><a href={article.url} target="_blank" rel="noopener noreferrer">{article.url}</a></td>
-             <td>{new Date(article.published_at).toLocaleDateString()}</td> 
+              <td>{new Date(article.pub_date).toLocaleDateString()}</td>
               <td>{article.description}</td>
               <td><button onClick={() => addToFavorites(article)}>Add to Favorites</button></td>
-      
-              
             </tr>
           ))}
         </tbody>
       </table>
- <div className="pagination">
+      <div className="pagination">
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index + 1}
@@ -95,15 +102,9 @@ return (
             {index + 1}
           </button>
         ))}
+      </div>
     </div>
-
-     
-  </div>
-  
-  
-);
+  );
 }
-
-
 
 export default Search;

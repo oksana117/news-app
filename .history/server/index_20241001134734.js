@@ -18,18 +18,21 @@ app.post('/login', (req, res) => {
         .then(user => {
             if (user) {
                 if (user.password === password) {
-                    res.json({ message: "Success", userId: user._id });
-                } else {
-                    res.json({ message: "Incorrect password." });
+
+                    res.json("Success")
+
+
+
+                }
+                else {
+                    res.json("Incorrect password.")
                 }
             } else {
-                res.json({ message: "User not found" });
+                res.json("User not found")
             }
+
         })
-        .catch(err => {
-            res.status(500).json({ message: "Server error", error: err });
-        });
-});
+})
 
 app.post('/register', (req, res) => {
     UsersModel.create(req.body)
