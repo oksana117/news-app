@@ -45,28 +45,6 @@ app.post('/logout', (req, res) => {
     res.json("Logged out successfully");
 });
 
-app.post('/add-to-favorites', (req, res) => {
-    const { userId, articleId } = req.body;
-
-    ArticleModel.findById(articleId)
-        .then(article => {
-            if (!article) {
-                return res.status(404).json({ message: "Article not found" });
-            }
-
-            if (!article.likedBy.includes(userId)) {
-                article.likedBy.push(userId);
-                return article.save();
-            } else {
-                return Promise.resolve(article);
-            }
-        })
-        .then(article => res.json({ message: "Article added to favorites", article }))
-        .catch(err => res.status(500).json({ message: "Server error", error: err }));
-});
-
-
-
 const apiKey1 = '7ef112f2e7bf3e22c6b23ab1bd567671'; //remove i
 const apiKey = 'h0OkQRWiT_Y-oyygjyFAvF9w9CpgeTDLzAvh1mUqleaLpc2p';
 

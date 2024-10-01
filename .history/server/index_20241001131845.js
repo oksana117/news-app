@@ -3,6 +3,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
 const UsersModel = require("./models/Users")
+const ArticleModel = require("./models/Articles")
 const request = require('request');
 
 
@@ -45,25 +46,6 @@ app.post('/logout', (req, res) => {
     res.json("Logged out successfully");
 });
 
-app.post('/add-to-favorites', (req, res) => {
-    const { userId, articleId } = req.body;
-
-    ArticleModel.findById(articleId)
-        .then(article => {
-            if (!article) {
-                return res.status(404).json({ message: "Article not found" });
-            }
-
-            if (!article.likedBy.includes(userId)) {
-                article.likedBy.push(userId);
-                return article.save();
-            } else {
-                return Promise.resolve(article);
-            }
-        })
-        .then(article => res.json({ message: "Article added to favorites", article }))
-        .catch(err => res.status(500).json({ message: "Server error", error: err }));
-});
 
 
 
