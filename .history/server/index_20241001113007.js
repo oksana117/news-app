@@ -11,15 +11,16 @@ app.use(express.json())
 app.use(cors())
 
 mongoose.connect("mongodb://localhost:27017/usersNewsArticles")
-/*
+
 app.post('/login', (req, res) => {
-    const { email, password} = req.body;
-    UsersModel.findOne({ email: email })
+    const { email, password, id } = req.body;
+    UsersModel.findOne({ email: email, id: id })
         .then(user => {
             if (user) {
                 if (user.password === password) {
+                    //res.json({ message: "Success", userId: req.user.id }); // stopped here
                     res.json("Success")
-                   
+                    //localStorage.setItem('user', JSON.stringify(user.id));
 
 
                 }
@@ -31,25 +32,7 @@ app.post('/login', (req, res) => {
             }
 
         })
-})*/
-app.post('/login', (req, res) => {
-    const { email, password } = req.body;
-    UsersModel.findOne({ email: email })
-        .then(user => {
-            if (user) {
-                if (user.password === password) {
-                    res.json({ message: "Success", userId: user._id });
-                } else {
-                    res.json({ message: "Incorrect password." });
-                }
-            } else {
-                res.json({ message: "User not found" });
-            }
-        })
-        .catch(err => {
-            res.status(500).json({ message: "Server error", error: err });
-        });
-});
+})
 
 app.post('/register', (req, res) => {
     UsersModel.create(req.body)
