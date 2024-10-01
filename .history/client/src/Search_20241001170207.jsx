@@ -30,7 +30,7 @@ function Search() {
         userId,
         articleId: article._id,
         title: article.title,
-        image: article.image,
+        content: article.content,
         source: article.source,
         pub_date: article.published_at,
         description: article.description
@@ -45,7 +45,7 @@ function Search() {
       }
     })*/
       .catch(error => console.error('Error:', error.message));
-    console.log(article.published_at);
+    console.log(article.pub_date);
   };
 
 

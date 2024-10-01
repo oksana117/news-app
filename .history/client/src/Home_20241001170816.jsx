@@ -1,19 +1,16 @@
- import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'; // Import a CSS file for styling
 
 function Home() {
   const [favorites, setFavorites] = useState([]);
   const userId = localStorage.getItem('userId'); // Retrieve user ID from local storage
 
+  console.log()
+
   useEffect(() => {
     if (userId) {
-      fetch(`http://localhost:3001/favorites/${userId}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
+      fetch(`http://localhost:3001//home/favorites/${userId}`)
+        .then(response => response.json())
         .then(data => {
           setFavorites(data);
         })

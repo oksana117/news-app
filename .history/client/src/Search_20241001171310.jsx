@@ -30,7 +30,7 @@ function Search() {
         userId,
         articleId: article._id,
         title: article.title,
-        image: article.image,
+        content: article.image,
         source: article.source,
         pub_date: article.published_at,
         description: article.description

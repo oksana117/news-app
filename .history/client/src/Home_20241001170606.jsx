@@ -1,4 +1,4 @@
- import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'; // Import a CSS file for styling
 
 function Home() {
@@ -7,13 +7,8 @@ function Home() {
 
   useEffect(() => {
     if (userId) {
-      fetch(`http://localhost:3001/favorites/${userId}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
+      fetch(`http://localhost:3001//home/favorites/favorites/${userId}`)
+        .then(response => response.json())
         .then(data => {
           setFavorites(data);
         })

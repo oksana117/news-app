@@ -30,9 +30,9 @@ function Search() {
         userId,
         articleId: article._id,
         title: article.title,
-        image: article.image,
+        content: article.content,
         source: article.source,
-        pub_date: article.published_at,
+        pub_date: article.pub_date,
         description: article.description
       })
     })
@@ -44,10 +44,9 @@ function Search() {
         console.error('Error adding to favorites:', data.message);
       }
     })*/
-      .catch(error => console.error('Error:', error.message));
-    console.log(article.published_at);
+    .catch(error => console.error('Error:', error.message));
   };
-
+   console.log()
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
@@ -95,7 +94,7 @@ function Search() {
               <td>{article.title}</td>
               <td><img src={article.image} alt={article.title} className="article-image" /></td>
               <td><a href={article.url} target="_blank" rel="noopener noreferrer">{article.url}</a></td>
-              <td>{new Date(article.published_at).toLocaleDateString()}</td>
+              <td>{new Date(article.pub_date).toLocaleDateString()}</td>
               <td>{article.description}</td>
               <td><button onClick={() => addToFavorites(article)}>Add to Favorites</button></td>
             </tr>

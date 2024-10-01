@@ -38,7 +38,7 @@ function Home() {
           <tbody>
             {favorites.map((article, index) => (
               <tr key={index}>
-                <td><img src={article.image} alt={article.title} className="article-image" /></td>
+                <td><img src={article.content} alt={article.title} className="article-image" /></td>
                 <td>{article.title}</td>
                 <td><a href={article.url} target="_blank" rel="noopener noreferrer">{article.source}</a></td>
                 <td>{article.description}</td>

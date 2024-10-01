@@ -58,14 +58,14 @@ app.post('/logout', (req, res) => {
 });
 
 app.post('/search/addfav', async (req, res) => {
-    const { userId, articleId, title, image, source, pub_date, description } = req.body;
+    const { userId, articleId, title, content, source, pub_date, description } = req.body;
 
     try {
         // Create a new article with the provided details
         const newArticle = new ArticleModel({
             _id: articleId,
             title,
-            image,
+            content,
             source,
             pub_date,
             description,
@@ -116,7 +116,7 @@ app.get('/search', (req, res) => {
 });
 
 
-app.get('/favorites/:userId', async (req, res) => {
+app.get('/home/favorites/:userId', async (req, res) => {
     const { userId } = req.params;
 
     try {
