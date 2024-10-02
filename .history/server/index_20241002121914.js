@@ -11,7 +11,7 @@ const apiKey1 = '7ef112f2e7bf3e22c6b23ab1bd567671';
 app.use(express.json())
 app.use(cors())
 
-//Database connection to a local mongo db server
+
 mongoose
     .connect("mongodb://localhost:27017", {
         useNewUrlParser: true,
@@ -23,8 +23,6 @@ mongoose
     })
     .catch(err => console.error(err));
 
-
-//POST
 
 //login user
 app.post('/login', (req, res) => {
@@ -130,9 +128,6 @@ app.post('/search/savehistory', async (req, res) => {
         res.status(500).json({ message: 'Error saving search history', error: error.message });
     }
 });
-
-
-//GET 
 
 //fetching the articles from the 3rd party API: Mediastack API
 app.get('/search', (req, res) => {

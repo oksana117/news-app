@@ -11,7 +11,7 @@ const apiKey1 = '7ef112f2e7bf3e22c6b23ab1bd567671';
 app.use(express.json())
 app.use(cors())
 
-//Database connection to a local mongo db server
+
 mongoose
     .connect("mongodb://localhost:27017", {
         useNewUrlParser: true,
@@ -23,8 +23,6 @@ mongoose
     })
     .catch(err => console.error(err));
 
-
-//POST
 
 //login user
 app.post('/login', (req, res) => {
@@ -97,43 +95,6 @@ app.post('/search/addfav', async (req, res) => {
 });
 
 
-
-//remove article from favourites
-app.post('/favorites/remove', async (req, res) => {
-    const { userId, articleId } = req.body;
-
-    try {
-        // Find the article by ID and update isDeleted to true
-        await ArticleModel.findByIdAndUpdate(articleId, { isDeleted: true });
-
-        res.status(200).json({ message: 'Article removed from favorites' });
-    } catch (error) {
-        res.status(500).json({ message: 'Server error' });
-    }
-});
-
-
-//save search history
-app.post('/search/savehistory', async (req, res) => {
-    const { userId, query } = req.body;
-    try {
-        const user = await UsersModel.findById(userId);
-        if (user) {
-            user.searchHistory.push({ query });
-            await user.save();
-            res.status(200).json({ message: 'Search history saved successfully' });
-        } else {
-            res.status(404).json({ message: 'User not found' });
-        }
-    } catch (error) {
-        console.error('Error saving search history:', error);
-        res.status(500).json({ message: 'Error saving search history', error: error.message });
-    }
-});
-
-
-//GET 
-
 //fetching the articles from the 3rd party API: Mediastack API
 app.get('/search', (req, res) => {
 
@@ -170,8 +131,7 @@ app.get('/favorites/:userId', async (req, res) => {
     }
 });
 
-
-//view more details 
+//
 app.get('/articles/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -185,7 +145,36 @@ app.get('/articles/:id', async (req, res) => {
     }
 });
 
+app.post('/favorites/remove', async (req, res) => {
+    const { userId, articleId } = req.body;
 
+    try {
+        // Find the article by ID and update isDeleted to true
+        await ArticleModel.findByIdAndUpdate(articleId, { isDeleted: true });
+
+        res.status(200).json({ message: 'Article removed from favorites' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+
+app.post('/search/savehistory', async (req, res) => {
+    const { userId, query } = req.body;
+    try {
+        const user = await UsersModel.findById(userId);
+        if (user) {
+            user.searchHistory.push({ query });
+            await user.save();
+            res.status(200).json({ message: 'Search history saved successfully' });
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        console.error('Error saving search history:', error);
+        res.status(500).json({ message: 'Error saving search history', error: error.message });
+    }
+});
 
 
 app.listen(3001, () => {
