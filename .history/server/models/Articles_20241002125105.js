@@ -14,7 +14,6 @@ const ArticleSchema = new mongoose.Schema({
     likedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'usersNewsArticles', default: null }]
 });
 
-
 const ArticleModel = mongoose.models.ArticleModel || mongoose.model("ArticleModel", ArticleSchema);
 
 
