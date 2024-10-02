@@ -55,7 +55,6 @@ function Home() {
               <th>Source</th>
               <th>Description</th>
               <th></th>
-               <th></th>
             </tr>
           </thead>
           <tbody>
@@ -66,7 +65,7 @@ function Home() {
                 <td><a href={article.url} target="_blank" rel="noopener noreferrer">{article.source}</a></td>
                 <td>{article.description}</td>
                 <td>
-                  <Link to={`/article/${article._id}`}><button className="btn btn-outline-info btn-sm">  View Details <span className="fa fa-solid fa-folder-open fa lg" aria-hidden="true"></span></button></Link> 
+                  <Link to={`/article/${article._id}`}><button className="btn btn-outline-info btn-sm">  View More <span className="fa fa-solid fa-folder-open fa lg" aria-hidden="true"></span></button></Link> 
                   
                   
                 </td><td><button  className="btn btn-outline-danger btn-sm" onClick={() => removeFromFavorites(article._id)}>Delete <span className="fa fa-trash-o fa-lg" aria-hidden="true"></span></button></td>
