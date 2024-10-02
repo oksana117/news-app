@@ -143,17 +143,30 @@ app.post('/favorites/remove', async (req, res) => {
     }
 });
 
-app.get('/articles/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const article = await ArticleModel.findById(id);
+app.get('/articles/:id', (req, res) => {
+    const { id } = req.params;
+    ArticleModel.findById(id, (err, article) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
         if (!article) {
             return res.status(404).send('Article not found');
         }
         res.json(article);
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
+    });
+});
+
+app.get('/articles/:id', (req, res) => {
+    const { id } = req.params;
+    ArticleModel.findById(id, (err, article) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        if (!article) {
+            return res.status(404).send('Article not found');
+        }
+        res.json(article);
+    });
 });
 
 

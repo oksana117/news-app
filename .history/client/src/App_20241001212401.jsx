@@ -33,9 +33,10 @@ function App() {
         {isAuthenticated && (
           <>
   
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={Home} />
             <Route path='/home' element={<Home />} />
             <Route path="/article/:id" element={<ArticleDetails />} />
+
             <Route path='/search' element={<Search />} />
             
           </>

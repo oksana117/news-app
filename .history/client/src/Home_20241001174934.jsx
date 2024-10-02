@@ -64,7 +64,7 @@ function Home() {
                 <td><a href={article.url} target="_blank" rel="noopener noreferrer">{article.source}</a></td>
                 <td>{article.description}</td>
                 <td><button onClick={() => removeFromFavorites(article._id)}>Remove from Favorites</button>
-                  <Link to={`/article/${article._id}`}><button>View More Details</button></Link>
+                   <Link to={`/article/${article._id}`}><button>View More Details</button></Link>
                 </td>
               </tr>
             ))}

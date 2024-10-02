@@ -7,9 +7,6 @@ import Search from './Search.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { NavbarBootstrap } from './components/Navbar.jsx'
 import { useState, useEffect } from 'react';
-import ArticleDetails from './ArticleDetails';
-
-
 
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
@@ -32,19 +29,15 @@ function App() {
         <Route path='/login' element={<Login setIsAuthenticated={setIsAuthenticated} />} />
         {isAuthenticated && (
           <>
-  
-            <Route path="/" element={<Home />} />
             <Route path='/home' element={<Home />} />
-            <Route path="/article/:id" element={<ArticleDetails />} />
             <Route path='/search' element={<Search />} />
-            
+            <Route path="/article/:id" component={ArticleDetails} />
           </>
         )}
       </Routes>
     </BrowserRouter>
   );
 }
-
 
 
 export default App

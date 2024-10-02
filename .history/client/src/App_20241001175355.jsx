@@ -4,7 +4,7 @@ import Register from './Register'
 import Login from './Login'
 import Home from './Home'
 import Search from './Search.jsx'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Switch } from 'react-router-dom'
 import { NavbarBootstrap } from './components/Navbar.jsx'
 import { useState, useEffect } from 'react';
 import ArticleDetails from './ArticleDetails';
@@ -32,12 +32,12 @@ function App() {
         <Route path='/login' element={<Login setIsAuthenticated={setIsAuthenticated} />} />
         {isAuthenticated && (
           <>
-  
-            <Route path="/" element={<Home />} />
-            <Route path='/home' element={<Home />} />
-            <Route path="/article/:id" element={<ArticleDetails />} />
+            <Switch>
+            <Route path="/" exact component={Home} />
+              <Route path='/home' element={<Home />} />
+              </Switch>
             <Route path='/search' element={<Search />} />
-            
+            <Route path="/article/:id" component={ArticleDetails} />
           </>
         )}
       </Routes>

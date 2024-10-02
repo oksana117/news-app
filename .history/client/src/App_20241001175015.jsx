@@ -32,19 +32,15 @@ function App() {
         <Route path='/login' element={<Login setIsAuthenticated={setIsAuthenticated} />} />
         {isAuthenticated && (
           <>
-  
-            <Route path="/" element={<Home />} />
             <Route path='/home' element={<Home />} />
-            <Route path="/article/:id" element={<ArticleDetails />} />
             <Route path='/search' element={<Search />} />
-            
+            <Route path="/article/:id" component={ArticleDetails} />
           </>
         )}
       </Routes>
     </BrowserRouter>
   );
 }
-
 
 
 export default App

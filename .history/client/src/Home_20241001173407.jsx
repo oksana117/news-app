@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
+ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css'; // Import a CSS file for styling
-import { Link } from 'react-router-dom';
-
 
 function Home() {
   const [favorites, setFavorites] = useState([]);
@@ -63,9 +62,7 @@ function Home() {
                 <td>{article.title}</td>
                 <td><a href={article.url} target="_blank" rel="noopener noreferrer">{article.source}</a></td>
                 <td>{article.description}</td>
-                <td><button onClick={() => removeFromFavorites(article._id)}>Remove from Favorites</button>
-                  <Link to={`/article/${article._id}`}><button>View More Details</button></Link>
-                </td>
+                <td><button onClick={() => removeFromFavorites(article._id)}>Remove from Favorites</button></td>
               </tr>
             ))}
           </tbody>

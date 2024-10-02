@@ -32,19 +32,19 @@ function App() {
         <Route path='/login' element={<Login setIsAuthenticated={setIsAuthenticated} />} />
         {isAuthenticated && (
           <>
-  
-            <Route path="/" element={<Home />} />
-            <Route path='/home' element={<Home />} />
-            <Route path="/article/:id" element={<ArticleDetails />} />
+            <Switch>
+            <Route path="/" exact component={Home} />
+              <Route path='/home' element={<Home />} />
+              </Switch>
             <Route path='/search' element={<Search />} />
-            
+            <Route path="/article/:id" component={ArticleDetails} />
           </>
         )}
       </Routes>
     </BrowserRouter>
   );
 }
-
+    </Switch>    </Switch>
 
 
 export default App
