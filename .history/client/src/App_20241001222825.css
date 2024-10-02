@@ -113,7 +113,7 @@
 }
 
 .pagination button:hover:not(.active) {
-  background-color: #229799;
+  background-color: #007f6f;
 }
 
 .article-image {
@@ -125,7 +125,7 @@
 }
 
 .favorites h2 {
-  color: #229799;
+  color: #009879;
 }
 
 .favorites ul {

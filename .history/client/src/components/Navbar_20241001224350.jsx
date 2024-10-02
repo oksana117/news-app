@@ -16,7 +16,7 @@ export const NavbarBootstrap = ({ isAuthenticated, setIsAuthenticated }) => {
     return (
         <div>
             {isAuthenticated && (
-        <Navbar fixed="top" expand="lg" className="bg-body-tertiary" bg="primary" data-bs-theme="dark"> 
+        <Navbar expand="lg" className="bg-body-tertiary" bg="primary" data-bs-theme="dark" style="background-color: #e3f2fd;"> 
             
             <Container fluid>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />

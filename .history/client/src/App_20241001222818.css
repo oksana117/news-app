@@ -100,7 +100,7 @@
 }
 
 .pagination button {
-  background-color: #229799;
+  background-color: #009879;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -109,11 +109,11 @@
 }
 
 .pagination button.active {
-  background-color: #229799;
+  background-color: #006f5f;
 }
 
 .pagination button:hover:not(.active) {
-  background-color: #229799;
+  background-color: #007f6f;
 }
 
 .article-image {
@@ -125,7 +125,7 @@
 }
 
 .favorites h2 {
-  color: #229799;
+  color: #009879;
 }
 
 .favorites ul {

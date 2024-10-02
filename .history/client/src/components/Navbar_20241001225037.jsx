@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
+//import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ export const NavbarBootstrap = ({ isAuthenticated, setIsAuthenticated }) => {
     return (
         <div>
             {isAuthenticated && (
-        <Navbar fixed="top" expand="lg" className="bg-body-tertiary" bg="primary" data-bs-theme="dark"> 
+        <Navbar expand="lg" className="bg-body-tertiary" bg="primary" data-bs-theme="dark"> 
             
             <Container fluid>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />

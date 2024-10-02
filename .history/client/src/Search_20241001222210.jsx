@@ -101,7 +101,7 @@ const saveSearchHistory = (query) => {
     <div className="app">
       <input
         className="search"
-        placeholder="Search for latest news..."
+        placeholder="Search"
         onChange={(e) => setQuery(e.target.value.toLowerCase())}
       />
       <table className="styled-table">
