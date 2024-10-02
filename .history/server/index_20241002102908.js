@@ -47,14 +47,9 @@ app.post('/login', (req, res) => {
 
 app.post('/register', (req, res) => {
     UsersModel.create(req.body)
-        .then(usersNewsArticles => {
-            res.status(200).json({ message: 'Registered successfully', data: usersNewsArticles });
-        })
-        .catch(err => {
-            res.status(500).json({ error: err.message });
-        });
-});
-
+        .then(usersNewsArticles => res.json(usersNewsArticles))
+        .catch(err => res.json(err))
+})
 
 app.post('/logout', (req, res) => {
 

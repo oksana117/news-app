@@ -45,7 +45,7 @@ function Home() {
   return (
     <div className="home">
       <div className="favorites">
-        <br></br>
+        
         <h2>Favourites</h2>
         <table className="styled-table">
           <thead>

@@ -99,7 +99,6 @@ const saveSearchHistory = (query) => {
 
   return (
     <div className="app">
-      <br></br> <br></br>
       <input
         className="search"
         placeholder="Search for latest news..."

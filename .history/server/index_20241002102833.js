@@ -11,6 +11,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+//mongoose.connect("mongodb://localhost:27017/usersNewsArticles")
 
 mongoose
     .connect("mongodb://localhost:27017", {
@@ -47,14 +48,9 @@ app.post('/login', (req, res) => {
 
 app.post('/register', (req, res) => {
     UsersModel.create(req.body)
-        .then(usersNewsArticles => {
-            res.status(200).json({ message: 'Registered successfully', data: usersNewsArticles });
-        })
-        .catch(err => {
-            res.status(500).json({ error: err.message });
-        });
-});
-
+        .then(usersNewsArticles => res.json(usersNewsArticles))
+        .catch(err => res.json(err))
+})
 
 app.post('/logout', (req, res) => {
 
@@ -65,7 +61,7 @@ app.post('/search/addfav', async (req, res) => {
     const { userId, articleId, title, image, source, url, pub_date, description } = req.body;
 
     try {
-        // Create a new favorite article with the provided details
+        // Create a new article with the provided details
         const newArticle = new ArticleModel({
             _id: articleId,
             title,
@@ -90,13 +86,16 @@ app.post('/search/addfav', async (req, res) => {
 
 
 
-const apiKey1 = '7ef112f2e7bf3e22c6b23ab1bd567671';
+const apiKey1 = '7ef112f2e7bf3e22c6b23ab1bd567671'; //remove i
 
 
 app.get('/search', (req, res) => {
 
     const keywords = req.query.keywords;
     const url = `http://api.mediastack.com/v1/news?access_key=${apiKey1}& keywords=${keywords}& countries=us`;
+    //
+
+
 
     request(url, function (error, response, body) {
         if (error) {

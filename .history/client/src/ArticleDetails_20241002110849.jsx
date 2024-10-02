@@ -37,7 +37,7 @@ function ArticleDetails() {
       <img src={article.image} alt={article.title} />
       <p><strong>Source:</strong> {article.source}</p>
       <p><strong>URL:</strong> <a href={article.url} target="_blank" rel="noopener noreferrer">{article.url}</a></p>
-      <p><strong>Description:</strong> {article.description} <a href={article.url} target="_blank" rel="noopener noreferrer" >Read more</a></p>
+      <p><strong>Description:</strong> {article.description} <a href={article.url} target="_blank" rel="noopener noreferrer" style="color: #cc0000">Read more</a></p>
     </div>
   );
 }
