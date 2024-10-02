@@ -161,7 +161,8 @@ app.post('/favorites/remove', async (req, res) => {
 app.post('/search/savehistory', async (req, res) => {
     const { userId, query } = req.body;
     try {
-        const user = await UsersModel.findById(userId);
+        console.log(user);
+        const user = await UserModel.findById(userId);
         if (user) {
             user.searchHistory.push({ query });
             await user.save();

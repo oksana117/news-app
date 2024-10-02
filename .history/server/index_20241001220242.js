@@ -157,11 +157,26 @@ app.post('/favorites/remove', async (req, res) => {
     }
 });
 
-
 app.post('/search/savehistory', async (req, res) => {
     const { userId, query } = req.body;
     try {
-        const user = await UsersModel.findById(userId);
+        const user = await UserModel.findById(userId);
+        if (user) {
+            user.searchHistory.push({ query });
+            await user.save();
+            res.status(200).json({ message: 'Search history saved successfully' });
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        console.error('Error saving search history:', error);
+        res.status(500).json({ message: 'Error saving search history', error: error.message });
+    }
+});
+app.post('/search/savehistory', async (req, res) => {
+    const { userId, query } = req.body;
+    try {
+        const user = await UserModel.findById(userId);
         if (user) {
             user.searchHistory.push({ query });
             await user.save();

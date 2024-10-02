@@ -48,7 +48,12 @@ function Search() {
       .catch(error => console.error('Error:', error.message));
     console.log(article.published_at);
   };
-  
+  ())
+    .then(data => {
+        if (data.message) {
+            console.log(data.message);
+        }
+    })
 const saveSearchHistory = (query) => {
     const userId = localStorage.getItem('userId'); // Retrieve user ID from local storage
     if (!userId) {
@@ -65,16 +70,9 @@ const saveSearchHistory = (query) => {
             query
         })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.message) {
-            console.log(data.message);
-        }
-    })
+    .then(response => response.json
     .catch(error => console.error('Error:', error.message));
 };
-
-
 
 
   const indexOfLastRow = currentPage * rowsPerPage;

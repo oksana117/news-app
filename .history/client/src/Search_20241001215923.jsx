@@ -48,7 +48,6 @@ function Search() {
       .catch(error => console.error('Error:', error.message));
     console.log(article.published_at);
   };
-  
 const saveSearchHistory = (query) => {
     const userId = localStorage.getItem('userId'); // Retrieve user ID from local storage
     if (!userId) {
@@ -73,8 +72,6 @@ const saveSearchHistory = (query) => {
     })
     .catch(error => console.error('Error:', error.message));
 };
-
-
 
 
   const indexOfLastRow = currentPage * rowsPerPage;

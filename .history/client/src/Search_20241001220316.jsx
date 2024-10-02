@@ -75,8 +75,6 @@ const saveSearchHistory = (query) => {
 };
 
 
-
-
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = news.slice(indexOfFirstRow, indexOfLastRow);

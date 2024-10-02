@@ -48,34 +48,26 @@ function Search() {
       .catch(error => console.error('Error:', error.message));
     console.log(article.published_at);
   };
-  
-const saveSearchHistory = (query) => {
+
+  const saveSearchHistory = (query) => {
     const userId = localStorage.getItem('userId'); // Retrieve user ID from local storage
     if (!userId) {
-        console.error('User not logged in');
-        return;
+      console.error('User not logged in');
+      return;
     }
     fetch('http://localhost:3001/search/savehistory', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            userId,
-            query
-        })
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userId,
+        query
+      })
     })
     .then(response => response.json())
-    .then(data => {
-        if (data.message) {
-            console.log(data.message);
-        }
-    })
     .catch(error => console.error('Error:', error.message));
-};
-
-
-
+  };
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
@@ -90,7 +82,7 @@ const saveSearchHistory = (query) => {
           console.log('Fetched data:', data);
           if (data && data.data && Array.isArray(data.data)) {
             setData(data.data);
-            saveSearchHistory(query);
+             saveSearchHistory(query);
           } else {
             console.error('Expected an array but got:', data.data);
             setData([]);

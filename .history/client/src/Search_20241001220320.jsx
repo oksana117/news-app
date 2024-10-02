@@ -50,30 +50,6 @@ function Search() {
   };
   
 const saveSearchHistory = (query) => {
-    const userId = localStorage.getItem('userId'); // Retrieve user ID from local storage
-    if (!userId) {
-        console.error('User not logged in');
-        return;
-    }
-    fetch('http://localhost:3001/search/savehistory', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            userId,
-            query
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.message) {
-            console.log(data.message);
-        }
-    })
-    .catch(error => console.error('Error:', error.message));
-};
-
 
 
 

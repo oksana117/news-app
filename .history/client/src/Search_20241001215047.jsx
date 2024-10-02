@@ -7,8 +7,6 @@ function Search() {
   const [news, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
- // const [ setFavorites] = useState([]);
-  //const userId = localStorage.getItem('userId'); // Retrieve user ID from local storage
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -20,7 +18,6 @@ function Search() {
       console.error('User not logged in');
       return;
     }
-    console.log("got to add fav");
     fetch('http://localhost:3001/search/addfav', {
       method: 'POST',
       headers: {
@@ -38,44 +35,28 @@ function Search() {
       })
     })
     .then(response => response.json())
-   /* .then(data => {
-      if (data.message === "Article saved and liked successfully") {
-        setFavorites(prevFavorites => [...prevFavorites, article]);
-      } else {
-        console.error('Error adding to favorites:', data.message);
-      }
-    })*/
-      .catch(error => console.error('Error:', error.message));
-    console.log(article.published_at);
+    .catch(error => console.error('Error:', error.message));
   };
-  
-const saveSearchHistory = (query) => {
+
+  const saveSearchHistory = (query) => {
     const userId = localStorage.getItem('userId'); // Retrieve user ID from local storage
     if (!userId) {
-        console.error('User not logged in');
-        return;
+      console.error('User not logged in');
+      return;
     }
     fetch('http://localhost:3001/search/savehistory', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            userId,
-            query
-        })
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userId,
+        query
+      })
     })
     .then(response => response.json())
-    .then(data => {
-        if (data.message) {
-            console.log(data.message);
-        }
-    })
     .catch(error => console.error('Error:', error.message));
-};
-
-
-
+  };
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
@@ -87,12 +68,10 @@ const saveSearchHistory = (query) => {
       fetch(`http://localhost:3001/search?keywords=${query}`)
         .then(response => response.json())
         .then(data => {
-          console.log('Fetched data:', data);
           if (data && data.data && Array.isArray(data.data)) {
             setData(data.data);
-            saveSearchHistory(query);
+            saveSearchHistory(query); // Save search query to history
           } else {
-            console.error('Expected an array but got:', data.data);
             setData([]);
           }
         })
@@ -132,15 +111,7 @@ const saveSearchHistory = (query) => {
         </tbody>
       </table>
       <div className="pagination">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => handlePageChange(index + 1)}
-            className={currentPage === index + 1 ? 'active' : ''}
-          >
-            {index + 1}
-          </button>
-        ))}
+        {/* Pagination logic here */}
       </div>
     </div>
   );
