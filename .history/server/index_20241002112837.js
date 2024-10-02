@@ -55,7 +55,7 @@ app.post('/register', async (req, res) => {
         const newUser = await UsersModel.create(req.body);
         res.status(200).json({ message: 'Registered successfully', data: newUser });
     } catch (err) {
-        console.error(err);
+        console.error(err); // Log the error for debugging
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });

@@ -121,7 +121,7 @@ const saveSearchHistory = (query) => {
             <tr key={index}>
               <td>{article.title}</td>
               <td><img src={article.image} alt={article.title} className="article-image" /></td>
-              <td><a href={article.url} target="_blank" rel="noopener noreferrer">{article.source}</a></td>
+              <td><a href={article.url} target="_blank" rel="noopener noreferrer">{article.s}</a></td>
               <td>{new Date(article.published_at).toLocaleDateString()}</td>
               <td>{article.description}</td>
               <td><button onClick={() => addToFavorites(article)}>Add to Favorites</button></td>

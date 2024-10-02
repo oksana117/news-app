@@ -45,21 +45,20 @@ app.post('/login', (req, res) => {
 });
 
 
-
-app.post('/register', async (req, res) => {
-    try {
-        const existingUser = await UsersModel.findOne({ email: req.body.email });
-        if (existingUser) {
-            return res.status(400).json({ message: 'User already exists' });
-        }
-        const newUser = await UsersModel.create(req.body);
-        res.status(200).json({ message: 'Registered successfully', data: newUser });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+app.post('/register', (req, res) => {
+    UsersModel.create(req.body)
+        .then(usersNewsArticles => {
+            res.status(200).json({ message: 'Registered successfully', data: usersNewsArticles });
+        })
+        .catch(err => {
+            res.status(500).json({ error: err.message });
+        });
 });
 
+Register.jsx: 14 
+ POST http://localhost:3001/register 500 (Internal Server Error)
+handleSubmit @Register.jsx: 14
+Show 22 more frames
 
 
 
