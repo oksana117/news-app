@@ -40,6 +40,14 @@ function Search() {
       })
     })
       .then(response => response.json())
+      
+   /* .then(data => {
+      if (data.message === "Article saved and liked successfully") {
+        setFavorites(prevFavorites => [...prevFavorites, article]);
+      } else {
+        console.error('Error adding to favorites:', data.message);
+      }
+    })*/
       .catch(error => console.error('Error:', error.message));
      toast.success(`${article.title} has been added to your favourites!`);
     console.log(article.published_at);
@@ -95,7 +103,6 @@ const saveSearchHistory = (query) => {
 
   return (
     <div className="app">
-        <ToastContainer />
       <br></br> <br></br>
       <input
         className="search"

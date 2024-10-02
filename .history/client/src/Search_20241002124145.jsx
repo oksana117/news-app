@@ -1,8 +1,6 @@
 import 'font-awesome/css/font-awesome.min.css';
 import { useEffect, useState } from "react";
 import "./app.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function Search() {
   const [query, setQuery] = useState("");
@@ -40,8 +38,15 @@ function Search() {
       })
     })
       .then(response => response.json())
+      
+   /* .then(data => {
+      if (data.message === "Article saved and liked successfully") {
+        setFavorites(prevFavorites => [...prevFavorites, article]);
+      } else {
+        console.error('Error adding to favorites:', data.message);
+      }
+    })*/
       .catch(error => console.error('Error:', error.message));
-     toast.success(`${article.title} has been added to your favourites!`);
     console.log(article.published_at);
   };
   
@@ -95,7 +100,6 @@ const saveSearchHistory = (query) => {
 
   return (
     <div className="app">
-        <ToastContainer />
       <br></br> <br></br>
       <input
         className="search"
