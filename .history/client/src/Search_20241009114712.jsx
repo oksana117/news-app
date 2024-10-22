@@ -123,6 +123,7 @@ const saveSearchHistory = (query) => {
               <td>{new Date(article.published_at).toLocaleDateString()}</td>
               <td>{article.description}</td>
               <Link to={`/article/${article._id}`}><button className="btn btn-outline-info btn-sm">  View Details <span className="fa fa-solid fa-folder-open fa lg" aria-hidden="true"></span></button></Link> 
+              <td><button className="btn btn-outline-info" onClick={() => viewArticle(article)}>View <span className="fa fa-solid fa-heart fa-lg" aria-hidden="true"></span></button></td>
               <td><button className="btn btn-outline-info" onClick={() => addToFavorites(article)}>Add to Favourites <span className="fa fa-solid fa-heart fa-lg" aria-hidden="true"></span></button></td>
             </tr>
           ))}

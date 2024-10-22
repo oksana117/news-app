@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import "./app.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from 'react-router-dom';
 
 function Search() {
   const [query, setQuery] = useState("");
@@ -122,7 +121,7 @@ const saveSearchHistory = (query) => {
               <td><a href={article.url} target="_blank" rel="noopener noreferrer">{article.source}</a></td>
               <td>{new Date(article.published_at).toLocaleDateString()}</td>
               <td>{article.description}</td>
-              <Link to={`/article/${article._id}`}><button className="btn btn-outline-info btn-sm">  View Details <span className="fa fa-solid fa-folder-open fa lg" aria-hidden="true"></span></button></Link> 
+              <td><button className="btn btn-outline-info" onClick={() => addToFavorites(article)}>Add to Favourites <span className="fa fa-solid fa-heart fa-lg" aria-hidden="true"></span></button></td>
               <td><button className="btn btn-outline-info" onClick={() => addToFavorites(article)}>Add to Favourites <span className="fa fa-solid fa-heart fa-lg" aria-hidden="true"></span></button></td>
             </tr>
           ))}

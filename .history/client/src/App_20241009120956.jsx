@@ -35,9 +35,9 @@ function App() {
             <Route path='/search' element={<Search />} />
             
           </>
-        ) : (
-          <Route path='*' element={<Login setIsAuthenticated={setIsAuthenticated}  />} />
-        )}
+        )} : (
+          <Route path='/login' element={<Login />} />
+        )
 
         
       </Routes>

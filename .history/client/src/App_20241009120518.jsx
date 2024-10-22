@@ -26,7 +26,7 @@ function App() {
       <Routes>
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-        {isAuthenticated ? (
+        {isAuthenticated && (
           <>
   
             <Route path="/" element={<Home />} />
@@ -35,11 +35,11 @@ function App() {
             <Route path='/search' element={<Search />} />
             
           </>
-        ) : (
-          <Route path='*' element={<Login setIsAuthenticated={setIsAuthenticated}  />} />
-        )}
+        )} else {!isAuthenticated && (
+          <Route path='/login' element={<Login }
+        )
 
-        
+        }
       </Routes>
     </BrowserRouter>
   );

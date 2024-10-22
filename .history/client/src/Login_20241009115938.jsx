@@ -22,6 +22,9 @@ function Login({ setIsAuthenticated }) {
                     setIsAuthenticated(true);
                     navigate('/home');
                 }
+                if else {
+                    
+                }
                 else {
                      toast.error(result.data.message);
                 }

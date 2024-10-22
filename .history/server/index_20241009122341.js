@@ -148,7 +148,7 @@ app.get('/search', (req, res) => {
             try {
                 const parsedBody = JSON.parse(body);
                 res.json(parsedBody);
-
+                c
             } catch (e) {
                 console.error('Error parsing JSON:', e);
                 res.status(500).send('Error parsing data');

@@ -21,9 +21,8 @@ function Login({ setIsAuthenticated }) {
                     console.log(storedUserId);
                     setIsAuthenticated(true);
                     navigate('/home');
-                }
-                else {
-                     toast.error(result.data.message);
+                } else {
+                    alert(result.data.message);
                 }
             })
             .catch(err => console.log(err));
@@ -31,7 +30,6 @@ function Login({ setIsAuthenticated }) {
 
     return (
         <div className="row">
-              <ToastContainer />
             <div className="offset-md-4 col-md-4">
                 <h1 id="font2">Please Login</h1>
                 <form onSubmit={handleSubmit}>

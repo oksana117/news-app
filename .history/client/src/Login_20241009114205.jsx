@@ -21,9 +21,8 @@ function Login({ setIsAuthenticated }) {
                     console.log(storedUserId);
                     setIsAuthenticated(true);
                     navigate('/home');
-                }
-                else {
-                     toast.error(result.data.message);
+                } else {
+                     toast.success(result.data.message);
                 }
             })
             .catch(err => console.log(err));
